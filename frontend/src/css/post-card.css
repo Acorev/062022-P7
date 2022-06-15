@@ -1,0 +1,102 @@
+body {
+  background: #4e5166;
+}
+
+.container {
+  padding: 0 15px;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+.card {
+  border: solid 1px #4e5166;
+  box-shadow: rgba(78, 81, 102, 0.50) 0px 3px 8px;
+  background: #ffd7d7;
+  border-radius: 15px;
+  margin-bottom: 15px;
+}
+
+.card:first-child {
+  margin-top: 15px;
+}
+
+.card-header {
+  padding: 10px;
+  position: relative;
+}
+
+.card-header-avatar {
+  padding-left: 65px;
+}
+
+.card-avatar {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 8px;
+  right: 50px;
+  width: 50px;
+  border-radius: 180px;
+}
+
+.card-title {
+  font-weight: bold;
+  color: #000;
+  font-size: 18px;
+  margin: 5px 0;
+}
+
+.card-date {
+  font-size: 12px;
+}
+
+.card-body {
+  padding: 0 10px 10px 10px;
+  color: #000;
+}
+
+.card-body .fullwidth {
+  width: calc(100% + 20px);
+  max-height: 400px;
+  display: block;
+  margin-left: -10px;
+  margin-right: -10px;
+  object-fit: contain;
+}
+
+.card-body p:first-child {
+  margin-top: 0;
+}
+
+.card-body p:last-child {
+  margin-bottom: 0;
+}
+
+.card-footer {
+  border-top: solid 1px #4e5166;
+  display: flex;
+  justify-content: space-between;
+  padding-left: 10px;
+  font-size: 12px;
+  position: relative;
+}
+
+.card-like p {
+  padding-top: 4px;
+}
+
+.card-like-icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 35px;
+  font-size: 20px;
+}
+
+.card-edit-icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 10px;
+  font-size: 20px;
+}
