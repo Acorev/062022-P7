@@ -1,5 +1,3 @@
-const img = 'img/tree.jpg';
-
 const POSTS = [
   {
     id: 1,

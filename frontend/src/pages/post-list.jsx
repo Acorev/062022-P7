@@ -10,14 +10,10 @@ export default function PostList() {
   }, []);
 
   return (
-    <div>
-      <div className="container">
-        <div className="colomn">
-          {posts.map(post => (
-            <PostCard key={post.id} post={post} />
-          ))}
-        </div>
-      </div>
+    <div className='container'>
+      {posts.map(post => (
+        <PostCard key={post.id} post={post} />
+      ))}
     </div>
   )
 }
