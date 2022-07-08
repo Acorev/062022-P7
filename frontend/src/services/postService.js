@@ -43,11 +43,14 @@ export default class PostService {
   }
 
   // Effacer un post
-  static deletePost(post) {
-    return fetch(`http://localhost:5500/POSTS/${post.id}`, {
+  static deletePost(id) {
+    return fetch(`http://localhost:5500/api/posts/${id}`, {
       method: 'DELETE',
-      body: JSON.stringify(post),
-      headers: { 'Content-Type': 'application/json' }
+      headers: {
+        "Accept": "",
+        "Authorization": `Bearer ${localStorage.token}`,
+        'Content-Type': 'application/json'
+      }
     })
       .then(response => response.json())
       .catch(error => this.handleError)
@@ -59,7 +62,11 @@ export default class PostService {
     return fetch('http://localhost:5500/POSTS', {
       method: 'POST',
       body: JSON.stringify(post),
-      headers: { 'Content-Type': 'application/json' }
+      headers: {
+        "Accept": "*/*",
+        "Authorization": `Bearer ${localStorage.token}`,
+        'Content-Type': 'application/json'
+      }
     })
       .then(response => response.json())
       .catch(error => this.handleError)

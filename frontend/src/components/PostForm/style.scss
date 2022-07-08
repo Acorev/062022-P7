@@ -15,7 +15,8 @@
   }
 
   &__bp {
-    text-align: center;
+    display: flex;
+    justify-content: space-between;
     margin: 10px 0;
 
     & button {
@@ -23,6 +24,14 @@
       background: #FD2D01;
       padding: 5px 10px;
       border-radius: 15px;
+
+      &:first-child {
+        margin-left: 20px;
+      }
+
+      &:last-child {
+        margin-right: 20px;
+      }
 
       &:hover {
         color: #FD2D01;

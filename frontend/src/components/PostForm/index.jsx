@@ -34,6 +34,12 @@ const PostForm = ({ post, isEditForm }) => {
     PostService.updatePost(post).then(() => navigate('/'));
   };
 
+  const deletePost = () => {
+    if (post._id) {
+      PostService.deletePost(post._id);
+    }
+  }
+
   return (
     <form onSubmit={e => handleSubmit(e)} className='postform'>
       <textarea
@@ -46,7 +52,8 @@ const PostForm = ({ post, isEditForm }) => {
         onChange={e => handleInputChange(e)}>
       </textarea>
       <div className='postform__bp'>
-        <button type='submit'>Valider</button>
+        <button type='submit'>Modifier</button>
+        <button onClick={() => deletePost()}>Supprimer</button>
       </div>
     </form>
   )

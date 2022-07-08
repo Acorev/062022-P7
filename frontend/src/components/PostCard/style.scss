@@ -69,7 +69,11 @@
         align-items: center;
 
         & img {
-            margin-left: 10px;
+            margin: 5px 15px;
         }
+    }
+
+    &__del {
+        cursor: pointer;
     }
 }
