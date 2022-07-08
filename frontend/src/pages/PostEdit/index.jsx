@@ -17,6 +17,7 @@ const PostEdit = () => {
       {post ? (
         <div>
           <h2>Editer {post.name}</h2>
+
           <PostForm post={post} isEditForm={true}></PostForm>
         </div>
       ) : (
