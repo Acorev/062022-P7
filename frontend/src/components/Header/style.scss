@@ -1,0 +1,52 @@
+.topbar {
+    background: #FD2D01;
+
+    &__logo {
+        display: block;
+        text-align: center;
+        padding: 11px;
+
+        & img {
+            width: 200px;
+        }
+    }
+
+    &__nav {
+        text-align: center;
+        padding-bottom: 16px;
+
+        & a,
+        & button {
+            border: none;
+            display: inline;
+            background: #4E5166;
+            padding: 5px 10px;
+            margin: 0 12px;
+            color: #FFF;
+            border-radius: 5px;
+
+            &:hover {
+                background: rgba($color: #4E5166, $alpha: 0.5);
+            }
+        }
+    }
+}
+
+@media only screen and (min-width: 620px) {
+    .topbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 25px;
+
+        &__logo {
+            & img {
+                width: 300px;
+            }
+        }
+
+        &__nav {
+            padding: 0;
+        }
+    }
+}

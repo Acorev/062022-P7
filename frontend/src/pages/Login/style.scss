@@ -1,0 +1,29 @@
+.login-form {
+    max-width: 300px;
+    margin: 100px auto;
+    padding: 10px 20px;
+    background: #FFD7D7;
+    border-radius: 5px;
+
+    &__titre {
+        margin: 0 0 30px 0;
+        text-align: center;
+    }
+
+    &__btn {
+        text-align: center;
+
+        & button {
+            border: 0;
+            font-size: 16px;
+            padding: 8px 16px;
+            background: #4E5166;
+            color: #FFF;
+            border-radius: 5px;
+
+            &:hover {
+                background: rgba($color: #4E5166, $alpha: 0.85);
+            }
+        }
+    }
+}

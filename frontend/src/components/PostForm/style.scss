@@ -1,0 +1,33 @@
+.postform {
+  border: solid 1px #4E5166;
+  box-shadow: rgba($color: #4E5166, $alpha: 0.5) 0px 3px 8px;
+  background: #FFD7D7;
+  border-radius: 15px;
+  margin-bottom: 15px;
+
+  &__area {
+    resize: none;
+    width: 100%;
+    border: none;
+    border-radius: 15px 15px 0 0;
+    background: #FFD7D7;
+    padding: 15px;
+  }
+
+  &__bp {
+    text-align: center;
+    margin: 10px 0;
+
+    & button {
+      color: white;
+      background: #FD2D01;
+      padding: 5px 10px;
+      border-radius: 15px;
+
+      &:hover {
+        color: #FD2D01;
+        background: white;
+      }
+    }
+  }
+}
