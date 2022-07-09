@@ -52,8 +52,15 @@ const PostForm = ({ post, isEditForm }) => {
         onChange={e => handleInputChange(e)}>
       </textarea>
       <div className='postform__bp'>
-        <button type='submit'>Modifier</button>
-        <button onClick={() => deletePost()}>Supprimer</button>
+        {isEditForm && (
+          <>
+            <button type='submit'>Modifier</button>
+            <button onClick={() => deletePost()}>Supprimer</button>
+          </>
+        )}
+
+        {!isEditForm && (<button type='submit'>Ajouter</button>)}
+
       </div>
     </form>
   )

@@ -7,6 +7,8 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Header from './components/Header';
 import PostEdit from './pages/PostEdit';
+import PostAdd from './pages/PostAdd/PostAdd';
+import PageNotFound from './pages/PageNotFound';
 
 const App = () => {
 
@@ -17,9 +19,11 @@ const App = () => {
                 <Route element={<PrivateRoute />}>
                     <Route path='/' element={<Home />} />
                     <Route path='/edit/:id' element={<PostEdit />} />
+                    <Route path='/add' element={<PostAdd />} />
                 </Route>
                 <Route path='/login' element={<Login />} />
                 <Route path='/signup' element={<Signup />} />
+                <Route path='/*' element={<PageNotFound />} />
             </Routes>
         </AuthService>
     )
