@@ -15,9 +15,12 @@ const Home = () => {
   return (
     <div>
       <div className='home'>
-        {posts.map(post => (
+        {posts ? (posts.map(post => (
           <PostCard key={post._id} post={post} />
-        ))}
+        ))
+        ) : (
+          <h4>Aucun post à afficher !</h4>
+        )}
       </div>
       <Link to={'/add'} className='home__add'>
         <img src={iconAdd} alt="add" />
