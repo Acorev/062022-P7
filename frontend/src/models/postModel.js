@@ -1,13 +1,17 @@
 export default class Post {
   constructor(
-    id,
-    name = '...',
-    message = '',
+    userId,
     Picture,
+    likes,
+    likeId,
+    message = '',
+
   ) {
-    this.id = id;
-    this.name = name;
-    this.message = message;
+    this.userId = userId;
     this.Picture = Picture;
+    this.likes = likes;
+    this.likeId = likeId;
+    this.message = message;
+
   }
 }

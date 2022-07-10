@@ -12,13 +12,12 @@ const Home = () => {
   useEffect(() => {
     PostService.getPosts().then(post => setPosts(post));
   }, []);
-
   return (
     <div>
       <div className='home'>
         {posts.map(post => (
           <PostCard key={post._id} post={post} />
-        ))};
+        ))}
       </div>
       <Link to={'/add'} className='home__add'>
         <img src={iconAdd} alt="add" />

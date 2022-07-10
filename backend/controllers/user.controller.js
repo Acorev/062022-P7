@@ -58,7 +58,7 @@ module.exports.login = async (req, res) => {
                                 role: user.role
                             },
                             process.env.KEY_TOKEN,
-                            { expiresIn: '1h' }
+                            { expiresIn: '24h' }
                         )
                     })
                 })

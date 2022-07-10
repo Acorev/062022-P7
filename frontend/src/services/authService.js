@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import jwtDecode from 'jwt-decode';
 
 import AuthContext from '../context/AuthContext';
 
@@ -8,6 +9,12 @@ const AuthService = ({ children }) => {
     const [authToken, setAuthToken] = useState(() =>
         localStorage.token
             ? localStorage.token
+            : null
+    );
+
+    const [user, setUser] = useState(() =>
+        localStorage.token
+            ? jwtDecode(localStorage.token)
             : null
     );
 
@@ -28,6 +35,7 @@ const AuthService = ({ children }) => {
 
             if (response.status === 200) {
                 setAuthToken(data.token);
+                setUser(jwtDecode(data.token));
                 localStorage.setItem('token', data.token);
                 navigate('/');
             }
@@ -54,11 +62,13 @@ const AuthService = ({ children }) => {
 
     let logoutUser = () => {
         setAuthToken(null);
+        setUser(null);
         localStorage.removeItem('token');
         navigate('/login');
     }
 
     let contextData = {
+        user,
         authToken,
         loginUser: loginUser,
         logoutUser: logoutUser,

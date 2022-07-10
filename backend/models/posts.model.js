@@ -10,10 +10,13 @@ const PostSchema = new mongoose.Schema(
       type: String,
     },
     likes: {
+      type: Number,
+      default: 0,
+    },
+    likeId: {
       type: Array,
       default: [],
     },
-
     message: {
       type: String
     },

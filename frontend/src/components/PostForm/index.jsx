@@ -42,6 +42,7 @@ const PostForm = ({ post, isEditForm }) => {
 
   return (
     <form onSubmit={e => handleSubmit(e)} className='postform'>
+
       <textarea
         className='postform__area'
         name="message"

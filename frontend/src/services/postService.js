@@ -1,12 +1,12 @@
 export default class PostService {
 
   // Chargement des posts
-  static getPosts() {
-    return fetch('http://localhost:5500/api/posts', {
+  static async getPosts() {
+    return await fetch('http://localhost:5500/api/posts', {
       method: "GET",
       headers: {
-        "Accept": "*/*",
         "Authorization": `Bearer ${localStorage.token}`,
+        'Content-Type': 'application/json',
       }
     })
       .then(response => response.json())
@@ -14,28 +14,26 @@ export default class PostService {
   }
 
   // Chargement d'un post
-  static getPost(id) {
-    return fetch(`http://localhost:5500/api/posts/${id}`, {
+  static async getPost(id) {
+    return await fetch(`http://localhost:5500/api/posts/${id}`, {
       method: "GET",
       headers: {
-        "Accept": "*/*",
         "Authorization": `Bearer ${localStorage.token}`,
+        'Content-Type': 'application/json',
       }
     })
       .then(response => response.json())
-      .then(data => this.isEmpty(data) ? null : data)
       .catch(error => this.handleError)
   }
 
   // Modifier un post
-  static updatePost(post) {
-    return fetch(`http://localhost:5500/api/posts/${post._id}`, {
+  static async updatePost(post) {
+    return await fetch(`http://localhost:5500/api/posts/${post._id}`, {
       method: 'PUT',
       body: JSON.stringify(post),
       headers: {
-        "Accept": "*/*",
         "Authorization": `Bearer ${localStorage.token}`,
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       }
     })
       .then(response => response.json())
@@ -43,13 +41,12 @@ export default class PostService {
   }
 
   // Effacer un post
-  static deletePost(id) {
-    return fetch(`http://localhost:5500/api/posts/${id}`, {
+  static async deletePost(id) {
+    return await fetch(`http://localhost:5500/api/posts/${id}`, {
       method: 'DELETE',
       headers: {
-        "Accept": "",
         "Authorization": `Bearer ${localStorage.token}`,
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       }
     })
       .then(response => response.json())
@@ -57,24 +54,17 @@ export default class PostService {
   }
 
   // Nouveau post
-  static addPost(post) {
-    delete post.created;
-    return fetch('http://localhost:5500/POSTS', {
+  static async addPost(post) {
+    return await fetch('http://localhost:5500/api/posts', {
       method: 'POST',
       body: JSON.stringify(post),
       headers: {
-        "Accept": "*/*",
-        "Authorization": `Bearer ${localStorage.token}`,
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.token}`,
       }
     })
       .then(response => response.json())
       .catch(error => this.handleError)
-  }
-
-
-  static isEmpty(data) {
-    return Object.keys(data).length === 0;
   }
 
   static handleError(error) {
