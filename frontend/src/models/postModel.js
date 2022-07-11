@@ -1,5 +1,6 @@
 export default class Post {
   constructor(
+    pseudo,
     userId,
     Picture,
     likes,
@@ -7,6 +8,7 @@ export default class Post {
     message = '',
 
   ) {
+    this.pseudo = pseudo;
     this.userId = userId;
     this.Picture = Picture;
     this.likes = likes;

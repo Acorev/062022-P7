@@ -7,9 +7,7 @@ import Post from '../../models/postModel';
 
 const PostAdd = () => {
   const { user } = useContext(AuthContext);
-
-  const [userId] = useState(user.userId);
-  const [post] = useState(new Post(userId));
+  const [post] = useState(new Post(user.pseudo, user.userId));
 
   return (
     <div className='postadd'>

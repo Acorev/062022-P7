@@ -35,12 +35,10 @@ const modifyPost = async (req, res) => {
 
 // Effacer post
 const deletePost = async (req, res) => {
-  Post.deleteOne({ _id: req.params.id })
+  await Post.deleteOne({ _id: req.params.id })
     .then(() => res.status(200).json({ message: 'Objet supprimé !' }))
     .catch(error => res.status(400).json({ error }));
 };
-
-const createLikePost = async (req, res) => { };
 
 module.exports = {
   getAllPosts,

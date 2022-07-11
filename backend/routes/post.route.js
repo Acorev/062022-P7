@@ -8,7 +8,7 @@ const auth = require('../middlewares/auth')
 // Routes
 router.get('/', auth, postCtrl.getAllPosts)
 router.get('/:id', auth, postCtrl.getOnePost)
-router.post('/', auth, postCtrl.createPost)
+router.post('/', postCtrl.createPost)
 router.put('/:id', auth, postCtrl.modifyPost)
 router.delete('/:id', auth, postCtrl.deletePost)
 router.post('/:id/like', auth, postCtrl.createLikePost)
