@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import './style.scss'
 import PostService from '../../services/postService';
+import AuthContext from '../../context/AuthContext';
 
 const PostForm = ({ post, isEditForm }) => {
+  const { user } = useContext(AuthContext);
+
   const [form, setForm] = useState({
     message: { value: post.message }
   });
@@ -36,7 +39,7 @@ const PostForm = ({ post, isEditForm }) => {
 
   const deletePost = () => {
     if (post._id) {
-      PostService.deletePost(post._id);
+      PostService.deletePost(post._id).then(() => navigate('/'));
     }
   }
 
@@ -52,12 +55,14 @@ const PostForm = ({ post, isEditForm }) => {
         value={form.message.value}
         onChange={e => handleInputChange(e)}>
       </textarea>
+
       <div className='postform__bp'>
         {isEditForm && (
-          <>
+          user.role === 8471 && (<>
             <button type='submit'>Modifier</button>
             <button onClick={() => deletePost()}>Supprimer</button>
-          </>
+
+          </>)
         )}
 
         {!isEditForm && (<button type='submit'>Ajouter</button>)}

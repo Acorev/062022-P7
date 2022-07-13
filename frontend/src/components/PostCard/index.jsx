@@ -36,7 +36,7 @@ const PostCard = ({ post }) => {
             <header className="postcard__header">
                 <img src={Avatar} alt="avatar" className="postcard__avatar" />
                 <div className="postcard__title">{post.pseudo}</div>
-                <div className="postcard__date">{formatDate(post.created)}</div>
+                <div className="postcard__date">{formatDate(post.updatedAt)}</div>
             </header>
             <div className="postcard__body">
                 <p>

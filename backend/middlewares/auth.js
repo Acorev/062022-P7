@@ -10,9 +10,10 @@ module.exports = (req, res, next) => {
         const token = req.headers.authorization.split(' ')[1];
         const decodedToken = jwt.verify(token, process.env.KEY_TOKEN);
         const userId = decodedToken.userId;
+        const role = decodedToken.role;
 
-        // ajout userId a req
-        req.auth = { userId };
+        // ajout userId et role a req
+        req.auth = { userId, role };
 
         // Vérification si userId existe et qu'il corresponde userId du token
         if (req.body.userId && req.body.userId !== userId) {

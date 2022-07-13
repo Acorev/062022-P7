@@ -4,7 +4,7 @@
     &__logo {
         display: block;
         text-align: center;
-        padding: 11px;
+        padding: 11px 11px;
 
         & img {
             width: 200px;
@@ -21,13 +21,19 @@
             display: inline;
             background: #4E5166;
             padding: 5px 10px;
-            margin: 0 12px;
+            margin: 12px;
             color: #FFF;
             border-radius: 5px;
 
             &:hover {
                 background: rgba($color: #4E5166, $alpha: 0.5);
             }
+        }
+
+        & p {
+            padding: 5px 10px 10px;
+            margin: 0 12px;
+            color: #FFF;
         }
     }
 }
@@ -40,13 +46,22 @@
         padding: 0 25px;
 
         &__logo {
+            padding: 11px;
+
             & img {
                 width: 300px;
             }
         }
 
         &__nav {
+            display: flex;
             padding: 0;
+
+        }
+
+        & p {
+            display: flex;
+            align-items: center;
         }
     }
 }

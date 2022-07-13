@@ -6,7 +6,7 @@ import Logo from '../../assets/logo.svg'
 import AuthContext from '../../context/AuthContext';
 
 const Header = () => {
-    const { authToken, logoutUser } = useContext(AuthContext);
+    const { user, authToken, logoutUser } = useContext(AuthContext);
 
     return (
         <header className='topbar'>
@@ -21,7 +21,10 @@ const Header = () => {
                     </>
                 )}
                 {authToken && (
-                    <button onClick={logoutUser}>Déconnection</button>
+                    <>
+                        <p>Bonjour {user.pseudo}</p>
+                        <button onClick={logoutUser}>Déconnection</button>
+                    </>
                 )}
             </nav>
         </header>
