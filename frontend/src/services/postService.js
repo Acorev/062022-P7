@@ -27,17 +27,34 @@ export default class PostService {
   }
 
   // Modifier un post
-  static async updatePost(post) {
-    return await fetch(`http://localhost:5500/api/posts/${post._id}`, {
-      method: 'PUT',
-      body: JSON.stringify(post),
-      headers: {
-        "Authorization": `Bearer ${localStorage.token}`,
-        'Content-Type': 'application/json',
-      }
-    })
-      .then(response => response.json())
-      .catch(error => this.handleError)
+  static async updatePost(post, file) {
+
+    if (typeof file === 'string') {
+      return await fetch(`http://localhost:5500/api/posts/${post._id}`, {
+        method: 'PUT',
+        body: JSON.stringify(post),
+        headers: {
+          "Authorization": `Bearer ${localStorage.token}`,
+          'Content-Type': 'application/json',
+        }
+      })
+        .then(response => response.json())
+        .catch(error => this.handleError)
+
+    } else {
+      console.log(file);
+      const formData = new FormData();
+      formData.append('post', JSON.stringify(post));
+      formData.append('image', file);
+
+      return await fetch(`http://localhost:5500/api/posts/${post._id}`, {
+        method: 'PUT',
+        body: formData,
+        headers: { "Authorization": `Bearer ${localStorage.token}` }
+      })
+        .then(response => response.json())
+        .catch(error => this.handleError)
+    }
   }
 
   // Effacer un post
@@ -54,14 +71,15 @@ export default class PostService {
   }
 
   // Nouveau post
-  static async addPost(post) {
+  static async addPost(post, file) {
+    const formData = new FormData();
+    formData.append('post', JSON.stringify(post));
+    formData.append('image', file);
+
     return await fetch('http://localhost:5500/api/posts', {
       method: 'POST',
-      body: JSON.stringify(post),
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.token}`,
-      }
+      body: formData,
+      headers: { 'Authorization': `Bearer ${localStorage.token}` }
     })
       .then(response => response.json())
       .catch(error => this.handleError)

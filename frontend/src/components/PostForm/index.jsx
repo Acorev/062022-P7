@@ -6,13 +6,16 @@ import PostService from '../../services/postService';
 import AuthContext from '../../context/AuthContext';
 
 const PostForm = ({ post, isEditForm }) => {
+
+  const navigate = useNavigate();
+
   const { user } = useContext(AuthContext);
 
   const [form, setForm] = useState({
     message: { value: post.message }
   });
 
-  const navigate = useNavigate();
+  const [file, setFile] = useState('');
 
   const handleInputChange = (e) => {
     const fieldName = e.target.name;
@@ -22,6 +25,11 @@ const PostForm = ({ post, isEditForm }) => {
     setForm({ ...form, ...newField })
   };
 
+  const onInputChangeHandle = (e) => {
+    setFile(e.target.files[0])
+  }
+
+  // Soumision d'un post
   const handleSubmit = e => {
     e.preventDefault();
     post.message = form.message.value;
@@ -29,22 +37,37 @@ const PostForm = ({ post, isEditForm }) => {
     isEditForm ? updatePost() : addPost();
   };
 
+  // Ajout d'un nouveau poste
   const addPost = () => {
-    PostService.addPost(post).then(() => navigate('/'));
+    PostService.addPost(post, file).then(() => navigate('/'));
   };
 
+  // Editer un poste
   const updatePost = () => {
-    PostService.updatePost(post).then(() => navigate('/'));
+    PostService.updatePost(post, file).then(() => navigate('/'));
   };
 
+  // Effacer un post
   const deletePost = () => {
     if (post._id) {
       PostService.deletePost(post._id).then(() => navigate('/'));
     }
-  }
+  };
+
+  const isAuth = user.role === 8471 || user.userId === post.userId;
 
   return (
     <form onSubmit={e => handleSubmit(e)} className='postform'>
+
+      <div className='postform__image'>
+        < input
+          type="file"
+          name="imageUrl"
+          id="image"
+          accept='image/*'
+          onChange={e => onInputChangeHandle(e)}
+        />
+      </div>
 
       <textarea
         className='postform__area'
@@ -58,11 +81,12 @@ const PostForm = ({ post, isEditForm }) => {
 
       <div className='postform__bp'>
         {isEditForm && (
-          user.role === 8471 && (<>
-            <button type='submit'>Modifier</button>
-            <button onClick={() => deletePost()}>Supprimer</button>
+          isAuth && (
+            <>
+              <button type='submit'>Modifier</button>
+              <button onClick={() => deletePost()}>Supprimer</button>
 
-          </>)
+            </>)
         )}
 
         {!isEditForm && (<button type='submit'>Ajouter</button>)}

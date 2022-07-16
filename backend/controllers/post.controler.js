@@ -1,4 +1,6 @@
 // Imports
+const { log } = require('console');
+const fs = require('fs')
 const Post = require('../models/posts.model');
 
 // Récuperer touts les posts de la base MongoDB
@@ -18,7 +20,14 @@ const getOnePost = async (req, res) => {
 
 // Nouveau post
 const createPost = async (req, res) => {
-  await Post.create(req.body)
+  const post = JSON.parse(req.body.post)
+  const postImg = req.file
+
+  post.imageUrl =
+    `${req.protocol}://${req.get('host')}/${postImg.path}`
+
+
+  await Post.create(post)
     .then(() => res.status(201).json({ message: 'Objet enregistré !' }))
     .catch(error => res.status(400).json({ error }))
 };
@@ -27,12 +36,28 @@ const createPost = async (req, res) => {
 // Mofifie post
 const modifyPost = async (req, res) => {
 
-  const postObject = { ...req.body };
+  // Modification object selon si il y a une image ou pas
+  const postObject = req.file ? {
+    ...req.post,
+    imageUrl: `${req.protocol}://${req.get('host')}/${req.file.path}`
+  } : { ...req.body }
 
   await Post.findById(req.params.id)
     .then(post => {
+
+      // Vérifie si cest le bon utilisateur
       if (post.userId !== req.auth.userId && req.auth.role !== 8471) {
         return req.status(401).json({ message: 'Requête non autorisée !' })
+      }
+
+      // Supprime l'image si il en a une nouvelle
+      if (req.file) {
+        try {
+          const pathImg = decodeURIComponent(new URL(post.imageUrl).pathname.slice(1))
+          fs.unlinkSync(pathImg)
+        } catch (error) {
+          console.log(error);
+        }
       }
 
       Post.updateOne({ _id: req.params.id }, { ...postObject, _id: req.params.id })
@@ -50,13 +75,21 @@ const deletePost = async (req, res) => {
 
   await Post.findById(req.params.id)
     .then(post => {
+
+      // Vérifie si cest le bon utilisateur
       if (post.userId !== req.auth.userId && req.auth.role !== 8471) {
         return req.status(401).json({ message: 'Requête non autorisée !' })
       }
 
-      Post.deleteOne({ _id: req.params.id })
-        .then(() => res.status(200).json({ message: 'Objet supprimé !' }))
-        .catch(error => res.status(400).json({ error }));
+      const pathImg = decodeURIComponent(new URL(post.imageUrl).pathname.slice(1))
+
+      // Efface l'image selectionnée
+      fs.unlink(pathImg, () => {
+        Post.deleteOne({ _id: req.params.id })
+          .then(() => res.status(200).json({ message: 'Objet supprimé !' }))
+          .catch(error => res.status(400).json({ error }))
+      })
+
 
     })
     .catch(error => res.status(404).json({ error }));
@@ -69,3 +102,11 @@ module.exports = {
   modifyPost,
   deletePost
 };
+/****
+ * 
+ * 
+ * Post.deleteOne({ _id: req.params.id })
+          .then(() => res.status(200).json({ message: 'Objet supprimé !' }))
+          .catch(error => res.status(400).json({ error }))
+ * 
+ */
