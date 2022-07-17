@@ -40,7 +40,7 @@ const PostCard = ({ post }) => {
             </header>
             <div className="postcard__body">
                 <p>
-
+                    {post.imageUrl && (<img src={post.imageUrl} alt="" />)}
                 </p>
                 <p>
                     {post.message}
