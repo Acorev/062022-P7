@@ -59,7 +59,11 @@ const PostForm = ({ post, isEditForm }) => {
   return (
     <form onSubmit={e => handleSubmit(e)} className='postform'>
 
+
       <div className='postform__image'>
+        <label htmlFor="image" >Choisir une image</label>
+        {file && (<span>{file['name']}</span>)}
+        {!file && (<span>Pas d'image selectionnée</span>)}
         < input
           type="file"
           name="imageUrl"

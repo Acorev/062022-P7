@@ -16,12 +16,43 @@
     padding: 15px;
   }
 
+  &__labelImg {
+    cursor: pointer;
+    color: white;
+    background: #FD2D01;
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
+
+  &__image {
+    padding: 15px;
+
+    & label {
+      cursor: pointer;
+      color: white;
+      background: #FD2D01;
+      padding: 5px 10px;
+      border-radius: 5px;
+      margin-right: 10px;
+
+      &:hover {
+        color: #FD2D01;
+        background: white;
+      }
+    }
+
+    & input {
+      display: none;
+    }
+  }
+
   &__bp {
     display: flex;
     justify-content: space-between;
     margin: 10px 0;
 
     & button {
+      border: none;
       color: white;
       background: #FD2D01;
       padding: 5px 10px;
