@@ -6,12 +6,14 @@ import AuthContext from '../context/AuthContext';
 
 const AuthService = ({ children }) => {
 
+    // state token
     const [authToken, setAuthToken] = useState(() =>
         localStorage.token
             ? localStorage.token
             : null
     );
 
+    // state user
     const [user, setUser] = useState(() =>
         localStorage.token
             ? jwtDecode(localStorage.token)
@@ -20,6 +22,7 @@ const AuthService = ({ children }) => {
 
     const navigate = useNavigate();
 
+    // Se connecter
     const loginUser = async (form) => {
         try {
             const response = await fetch('http://localhost:5500/api/auth/login', {
@@ -45,6 +48,7 @@ const AuthService = ({ children }) => {
         }
     };
 
+    // Inscription du user
     const signupUser = async (form) => {
         await fetch('http://localhost:5500/api/auth/signup', {
             method: 'POST',
@@ -60,6 +64,7 @@ const AuthService = ({ children }) => {
             .catch(error => console.log(error));
     }
 
+    // Se déconnecter
     let logoutUser = () => {
         setAuthToken(null);
         setUser(null);
@@ -67,6 +72,7 @@ const AuthService = ({ children }) => {
         navigate('/login');
     }
 
+    // Init context
     let contextData = {
         user,
         authToken,

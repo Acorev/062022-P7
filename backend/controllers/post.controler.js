@@ -23,9 +23,10 @@ const createPost = async (req, res) => {
   const post = JSON.parse(req.body.post)
   const postImg = req.file
 
-  post.imageUrl =
-    `${req.protocol}://${req.get('host')}/${postImg.path}`
-
+  if (postImg) {
+    post.imageUrl =
+      `${req.protocol}://${req.get('host')}/${postImg.path}`
+  }
 
   await Post.create(post)
     .then(() => res.status(201).json({ message: 'Objet enregistré !' }))
@@ -39,7 +40,8 @@ const modifyPost = async (req, res) => {
   // Modification object selon si il y a une image ou pas
   const postObject = req.file ? {
     ...req.post,
-    imageUrl: `${req.protocol}://${req.get('host')}/${req.file.path}`
+    imageUrl: `${req.protocol}://${req.get('host')}/${req.file.path}`,
+    message: JSON.parse(req.body.post).message
   } : { ...req.body }
 
   await Post.findById(req.params.id)
@@ -102,11 +104,3 @@ module.exports = {
   modifyPost,
   deletePost
 };
-/****
- * 
- * 
- * Post.deleteOne({ _id: req.params.id })
-          .then(() => res.status(200).json({ message: 'Objet supprimé !' }))
-          .catch(error => res.status(400).json({ error }))
- * 
- */

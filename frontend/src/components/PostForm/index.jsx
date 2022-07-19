@@ -39,12 +39,21 @@ const PostForm = ({ post, isEditForm }) => {
 
   // Ajout d'un nouveau poste
   const addPost = () => {
-    PostService.addPost(post, file).then(() => navigate('/'));
+    if (post.message !== '' || file !== '') {
+      PostService.addPost(post, file).then(() => navigate('/'));
+    } else {
+      alert('Veuillez ajouter une image ou un message !!!')
+    }
   };
 
   // Editer un poste
   const updatePost = () => {
-    PostService.updatePost(post, file).then(() => navigate('/'));
+    console.log(post.message);
+    if (post.message !== '' || file !== '') {
+      PostService.updatePost(post, file).then(() => navigate('/'));
+    } else {
+      alert('Veuillez ajouter une image ou un message !!!')
+    }
   };
 
   // Effacer un post
