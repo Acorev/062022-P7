@@ -9,6 +9,8 @@ KEY_TOKEN=  'clé secrète pour la session'
 
 ## Lancer le backend:
 
+cd backend
+
 Installer les dépendances: npm install
 Lancer le server: npm run start
 
@@ -17,6 +19,8 @@ Lancer le server: npm run start
 # Frontend
 
 ## Lancer le frontend:
+
+cd frontend
 
 Installer les dépendances: yarn install
 

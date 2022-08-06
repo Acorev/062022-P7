@@ -80,7 +80,7 @@ const Signup = () => {
             />
 
             <Field
-                label='Adress email'
+                label='Adresse email'
                 name='email'
                 type='email'
                 value={form.email.value}
