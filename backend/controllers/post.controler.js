@@ -1,5 +1,4 @@
 // Imports
-const { log } = require('console');
 const fs = require('fs')
 const Post = require('../models/posts.model');
 
@@ -83,14 +82,24 @@ const deletePost = async (req, res) => {
         return req.status(401).json({ message: 'Requête non autorisée !' })
       }
 
-      const pathImg = decodeURIComponent(new URL(post.imageUrl).pathname.slice(1))
+      if (post.imageUrl) {
+        // Efface l'image et le message selectionnée
+        const pathImg = decodeURIComponent(new URL(post.imageUrl).pathname.slice(1))
 
-      // Efface l'image selectionnée
-      fs.unlink(pathImg, () => {
+        fs.unlink(pathImg, () => {
+          Post.deleteOne({ _id: req.params.id })
+            .then(() => res.status(200).json({ message: 'Objet supprimé !' }))
+            .catch(error => res.status(400).json({ error }))
+        })
+
+      } else {
+        // Efface le message selectionnée
         Post.deleteOne({ _id: req.params.id })
           .then(() => res.status(200).json({ message: 'Objet supprimé !' }))
           .catch(error => res.status(400).json({ error }))
-      })
+      }
+
+
 
 
     })

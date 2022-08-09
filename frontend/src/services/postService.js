@@ -42,7 +42,6 @@ export default class PostService {
         .catch(error => this.handleError)
 
     } else {
-      console.log(file);
       const formData = new FormData();
       formData.append('post', JSON.stringify(post));
       formData.append('image', file);

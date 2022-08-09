@@ -41,14 +41,11 @@ const PostForm = ({ post, isEditForm }) => {
   const addPost = () => {
     if (post.message !== '' || file !== '') {
       PostService.addPost(post, file).then(() => navigate('/'));
-    } else {
-      alert('Veuillez ajouter une image ou un message !!!')
     }
   };
 
   // Editer un poste
   const updatePost = () => {
-    console.log(post.message);
     if (post.message !== '' || file !== '') {
       PostService.updatePost(post, file).then(() => navigate('/'));
     } else {
